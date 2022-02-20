@@ -15,13 +15,13 @@ function Chunker({ chunks, setChunks }) {
 
     if (script.length > 0) {
       setChunks([]);
-      let sentences = script.split(".");
+      let sentences = script.trim().split(".");
       let count = 0;
       let newChunks = [];
       for (let i = 0; i < sentences.length; i += 2) {
         let text;
         if (i + 1 < sentences.length) {
-          text = sentences[i] + sentences[i + 1];
+          text = sentences[i] + ". " + sentences[i + 1] + ".";;
         } else {
           text = sentences[i];
         }
