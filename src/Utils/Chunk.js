@@ -8,6 +8,6 @@ export default class Chunk {
 }
 
 export function sortChunk(a, b) {
-  let diff = a.nextReview - b.nextReview; 
-  return (Math.abs(diff) > 0.001) ? diff : a.number - b.number;
+  let diff = a.nextReview - b.nextReview;
+  return Math.abs(diff) > 0.001 ? diff : a.number - b.number;
 }

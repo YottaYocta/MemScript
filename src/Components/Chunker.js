@@ -34,12 +34,16 @@ function Chunker({ chunks, setChunks }) {
   };
 
   return (
-    <div>
+    <div className="form-group">
       <form onSubmit={handleSubmit}>
-        <label>
-          Enter Script:
-          <input type="text" value={script} onChange={handleChange}></input>
-        </label>
+        <label className="form-label mt-4">Enter Script:</label>
+        <input
+          className="form-control"
+          placeholder="Copy and paste your script here"
+          type="text"
+          value={script}
+          onChange={handleChange}
+        ></input>
       </form>
     </div>
   );
