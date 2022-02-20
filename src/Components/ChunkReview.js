@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { sortChunk } from "../Utils/Chunk";
+import Motion from './Motion';
 
 function ChunkReview({ chunks, setChunks }) {
   const [mode, setMode] = useState("review");
@@ -61,9 +62,12 @@ function ChunkReview({ chunks, setChunks }) {
       case "test":
         {
           return (
-            <button className="btn btn-primary btn-lg" onClick={endTest}>
-              Finish test
-            </button>
+            <div>
+              <Motion />
+              <button className="btn btn-primary btn-lg" onClick={endTest}>
+                Finish test
+              </button>
+            </div>
           );
         }
         break;
