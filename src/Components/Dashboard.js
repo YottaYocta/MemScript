@@ -30,7 +30,7 @@ function Dashboard() {
           </a>
         </div>
       </nav>
-      <div className="container-fluid m-3">
+      <div className="container-fluid mt-3 mb-3">
         {chunks.length > 0 ? (
           <Review chunks={chunks} setChunks={setChunks} />
         ) : (

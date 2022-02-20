@@ -21,7 +21,7 @@ function Chunker({ chunks, setChunks }) {
       for (let i = 0; i < sentences.length; i += 2) {
         let text;
         if (i + 1 < sentences.length) {
-          text = sentences[i] + ". " + sentences[i + 1] + ".";;
+          text = sentences[i] + ". " + sentences[i + 1] + ".";
         } else {
           text = sentences[i];
         }

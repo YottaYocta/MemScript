@@ -7,7 +7,7 @@ export default class Chunk {
   }
 
   getWords() {
-    return this.text.split(' ').length
+    return this.text.split(" ").length;
   }
 }
 
