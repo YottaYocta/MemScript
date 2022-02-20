@@ -5,6 +5,10 @@ export default class Chunk {
     this.strength = 0;
     this.text = text;
   }
+
+  getWords() {
+    return this.text.split(' ').length
+  }
 }
 
 export function sortChunk(a, b) {

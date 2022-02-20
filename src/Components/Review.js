@@ -23,7 +23,7 @@ function Review({ chunks, setChunks }) {
                 <p>Phrase # {chunk.number}</p>
                 <p>
                   Progress till complete:{" "}
-                  {Math.floor((chunks[0].strength / 7.0) * 100)} %
+                  {Math.floor((chunk.strength / 7.0) * 100)} %
                 </p>
               </li>
             ))}

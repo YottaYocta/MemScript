@@ -18,7 +18,7 @@ function Dashboard() {
     if (chunks.length > 0 && finished) {
       alert("Congratulations, script memorization training complete");
     }
-    //console.log(chunks);
+    console.log(chunks);
   }, [chunks]);
 
   return (

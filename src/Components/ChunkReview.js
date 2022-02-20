@@ -4,23 +4,40 @@ import { sortChunk } from "../Utils/Chunk";
 
 function ChunkReview({ chunks, setChunks }) {
   const [mode, setMode] = useState("review");
+  const [startTime, setStartTime] = useState(Date.now());
+  const [endTime, setEndTime] = useState(Date.now());
+  const [WPM, setWPM] = useState(0);
+
+  useEffect(() => {
+    setWPM(chunks[0].getWords() / ((endTime - startTime) / 60000));
+  }, [endTime])
 
   const startTest = () => {
     setMode("test");
+    setStartTime(Date.now());
   };
 
   const endTest = () => {
     setMode("results");
+    setEndTime(Date.now());
   };
 
   const finishCard = (rating) => {
     let chunksCopy = [...chunks];
-    if (rating == 0) {
-      chunksCopy[0].strength = 0;
-    } else {
-      chunksCopy[0].strength += rating;
+    let penalty = 0;
+
+    if (WPM > 180) {
+      penalty -= Math.abs((WPM - 180) / 20);
+    } else if (WPM < 70) {
+      penalty -= Math.abs((WPM - 70) / 20);
     }
-    chunksCopy[0].strength = Math.min(7, chunksCopy[0].strength);
+
+    if (rating == 0) {
+      chunksCopy[0].strength = 0 + penalty;
+    } else {
+      chunksCopy[0].strength += rating + penalty;
+    }
+    chunksCopy[0].strength = Math.max(0, Math.min(7, chunksCopy[0].strength));
     chunksCopy[0].nextReview = Math.pow(chunksCopy[0].strength, 1.5);
     chunksCopy.sort(sortChunk);
     setChunks(chunksCopy);
@@ -53,6 +70,9 @@ function ChunkReview({ chunks, setChunks }) {
       case "results": {
         return (
           <div className="row">
+            <p>
+              Words per minute: {WPM}
+            </p>
             <button
               className="col btn btn-primary btn-lg me-2"
               onClick={() => finishCard(0)}
