@@ -13,7 +13,7 @@ function Dashboard() {
   const [chunkSize, setChunkSize] = useState(2);
 
   useEffect(() => {
-      setChunks(rechunk(script, chunkSize));
+    setChunks(rechunk(script, chunkSize));
   }, [chunkSize, script]);
 
   useEffect(() => {
@@ -25,9 +25,9 @@ function Dashboard() {
     }
     if (chunks.length > 0 && finished) {
       alert(`Congratulations, script memorization round complete`);
-      setChunkSize(prev => prev * 2);
+      setChunkSize((prev) => prev * 2);
     }
-  }, [chunks, maxStrength]);
+  }, [chunks]);
 
   return (
     <div>
@@ -40,9 +40,19 @@ function Dashboard() {
       </nav>
       <div className="container-fluid mt-3 mb-3">
         {chunks.length > 0 && script ? (
-          <Review chunks={chunks} setChunks={setChunks} maxStrength={maxStrength}/>
+          <Review
+            chunks={chunks}
+            setChunks={setChunks}
+            maxStrength={maxStrength}
+          />
         ) : (
-          <Chunker chunkSize={chunkSize} chunks={chunks} setChunks={setChunks} script={script} setScript={setScript}/>
+          <Chunker
+            chunkSize={chunkSize}
+            chunks={chunks}
+            setChunks={setChunks}
+            script={script}
+            setScript={setScript}
+          />
         )}
       </div>
     </div>

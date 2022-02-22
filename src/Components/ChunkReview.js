@@ -43,7 +43,10 @@ function ChunkReview({ chunks, setChunks, maxStrength }) {
     } else {
       chunksCopy[0].strength += rating + penalty;
     }
-    chunksCopy[0].strength = Math.max(0, Math.min(maxStrength, chunksCopy[0].strength));
+    chunksCopy[0].strength = Math.max(
+      0,
+      Math.min(maxStrength, chunksCopy[0].strength)
+    );
     chunksCopy[0].nextReview = Math.pow(chunksCopy[0].strength, 1.5);
     chunksCopy.sort(sortChunk);
     setChunks(chunksCopy);

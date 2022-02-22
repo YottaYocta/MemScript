@@ -3,8 +3,7 @@ import { useState } from "react";
 
 import { rechunk } from "../Utils/Chunk";
 
-function Chunker({ chunkSize, chunks, setChunks , script, setScript}) {
-
+function Chunker({ chunkSize, chunks, setChunks, script, setScript }) {
   const [scriptValue, setScriptValue] = useState("");
 
   const handleChange = (e) => {

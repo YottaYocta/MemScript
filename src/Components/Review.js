@@ -28,7 +28,11 @@ function Review({ chunks, setChunks, maxStrength }) {
           </ul>
         </div>
         <div className="col">
-          <ChunkReview chunks={chunks} setChunks={setChunks} maxStrength={maxStrength}/>
+          <ChunkReview
+            chunks={chunks}
+            setChunks={setChunks}
+            maxStrength={maxStrength}
+          />
         </div>
       </div>
     );

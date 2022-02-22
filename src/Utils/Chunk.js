@@ -24,7 +24,7 @@ export function rechunk(script, size) {
     let text = "";
     for (let j = 0; j < size; j++) {
       if (i + j < sentences.length) {
-        text += sentences[i + j] + ". "; 
+        text += sentences[i + j] + ". ";
       }
     }
     chunks.push(new Chunk(count, text));
