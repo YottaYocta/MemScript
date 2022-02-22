@@ -12,7 +12,7 @@ function ChunkReview({ chunks, setChunks }) {
 
   useEffect(() => {
     setWPM(chunks[0].getWords() / ((endTime - startTime) / 60000));
-  }, [endTime]);
+  }, [startTime, chunks, endTime]);
 
   const startTest = () => {
     setMode("test");
@@ -38,7 +38,7 @@ function ChunkReview({ chunks, setChunks }) {
       penalty -= Math.abs((WPM - 70) / 20);
     }
 
-    if (rating == 0) {
+    if (rating === 0) {
       chunksCopy[0].strength = 0 + penalty;
     } else {
       chunksCopy[0].strength += rating + penalty;
@@ -101,31 +101,25 @@ function ChunkReview({ chunks, setChunks }) {
   const renderCard = () => {
     switch (mode) {
       case "review":
-        {
-          return (
-            <div>
-              <p className="blockquote">{chunks[0].text}</p>
-              <p>Word count: {chunks[0].getWords()}</p>
-              <button className="btn btn-primary btn-lg" onClick={startTest}>
-                Test this Phrase
-              </button>
-            </div>
-          );
-        }
-        break;
+        return (
+          <div>
+            <p className="blockquote">{chunks[0].text}</p>
+            <p>Word count: {chunks[0].getWords()}</p>
+            <button className="btn btn-primary btn-lg" onClick={startTest}>
+              Test this Phrase
+            </button>
+          </div>
+        );
       case "test":
-        {
-          return (
-            <div>
-              <Differ setMovementCount={setMovementCount} />
-              <button className="btn btn-primary btn-lg" onClick={endTest}>
-                Finish test
-              </button>
-            </div>
-          );
-        }
-        break;
-      case "results": {
+        return (
+          <div>
+            <Differ setMovementCount={setMovementCount} />
+            <button className="btn btn-primary btn-lg" onClick={endTest}>
+              Finish test
+            </button>
+          </div>
+        );
+      case "results":
         return (
           <div className="row">
             <p className="blockquote">{chunks[0].text}</p>
@@ -152,7 +146,8 @@ function ChunkReview({ chunks, setChunks }) {
             </button>
           </div>
         );
-      }
+      default:
+        break;
     }
   };
 

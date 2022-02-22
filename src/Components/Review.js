@@ -1,7 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
 
-import ChunkCard from "./ChunkCard";
 import ChunkReview from "./ChunkReview";
 
 function Review({ chunks, setChunks }) {

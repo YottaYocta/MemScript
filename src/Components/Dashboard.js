@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 
 import Chunker from "./Chunker";
 import Review from "./Review";
-import Chunk from "../Utils/Chunk";
 
 function Dashboard() {
   const [chunks, setChunks] = useState([]);
@@ -25,7 +24,7 @@ function Dashboard() {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container-fluid">
-          <a href="#" className="navbar-brand">
+          <a href="/" className="navbar-brand">
             MemScript
           </a>
         </div>
