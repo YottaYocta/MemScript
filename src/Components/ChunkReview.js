@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { sortChunk } from "../Utils/Chunk";
 import Differ from "./Motion";
 
-function ChunkReview({ chunks, setChunks }) {
+function ChunkReview({ chunks, setChunks, maxStrength }) {
   const [mode, setMode] = useState("review");
   const [startTime, setStartTime] = useState(Date.now());
   const [endTime, setEndTime] = useState(Date.now());
@@ -33,9 +33,9 @@ function ChunkReview({ chunks, setChunks }) {
     }
 
     if (WPM > 180) {
-      penalty -= Math.abs((WPM - 180) / 20);
+      penalty -= Math.abs((WPM - 180) / 30);
     } else if (WPM < 70) {
-      penalty -= Math.abs((WPM - 70) / 20);
+      penalty -= Math.abs((WPM - 70) / 30);
     }
 
     if (rating === 0) {
@@ -43,7 +43,7 @@ function ChunkReview({ chunks, setChunks }) {
     } else {
       chunksCopy[0].strength += rating + penalty;
     }
-    chunksCopy[0].strength = Math.max(0, Math.min(7, chunksCopy[0].strength));
+    chunksCopy[0].strength = Math.max(0, Math.min(maxStrength, chunksCopy[0].strength));
     chunksCopy[0].nextReview = Math.pow(chunksCopy[0].strength, 1.5);
     chunksCopy.sort(sortChunk);
     setChunks(chunksCopy);

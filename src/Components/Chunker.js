@@ -1,36 +1,20 @@
 import React from "react";
 import { useState } from "react";
 
-import Chunk from "../Utils/Chunk";
+import { rechunk } from "../Utils/Chunk";
 
-function Chunker({ chunks, setChunks }) {
-  const [script, setScript] = useState("");
+function Chunker({ chunkSize, chunks, setChunks , script, setScript}) {
+
+  const [scriptValue, setScriptValue] = useState("");
 
   const handleChange = (e) => {
-    setScript(e.target.value);
+    setScriptValue(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (script.length > 0) {
-      setChunks([]);
-      let sentences = script.trim().split(".");
-      let count = 0;
-      let newChunks = [];
-      for (let i = 0; i < sentences.length; i += 2) {
-        let text;
-        if (i + 1 < sentences.length) {
-          text = sentences[i] + ". " + sentences[i + 1] + ".";
-        } else {
-          text = sentences[i];
-        }
-        newChunks.push(new Chunk(count, text));
-        count += 1;
-      }
-      setChunks(newChunks);
-      setScript("");
-    }
+    setChunks(rechunk(scriptValue, chunkSize));
+    setScript(scriptValue);
   };
 
   return (
@@ -41,7 +25,7 @@ function Chunker({ chunks, setChunks }) {
           className="form-control"
           placeholder="Copy and paste your script here"
           type="text"
-          value={script}
+          value={scriptValue}
           onChange={handleChange}
         ></input>
       </form>

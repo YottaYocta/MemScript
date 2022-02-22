@@ -2,7 +2,7 @@ import React from "react";
 
 import ChunkReview from "./ChunkReview";
 
-function Review({ chunks, setChunks }) {
+function Review({ chunks, setChunks, maxStrength }) {
   const renderChunks = () => {
     return (
       <div className="row">
@@ -13,7 +13,7 @@ function Review({ chunks, setChunks }) {
               <p>Phrase # {chunks[0].number}</p>
               <p>
                 Progress till complete:{" "}
-                {Math.floor((chunks[0].strength / 7.0) * 100)} %
+                {Math.floor((chunks[0].strength / maxStrength) * 100)} %
               </p>
             </li>
             {chunks.slice(1).map((chunk) => (
@@ -21,14 +21,14 @@ function Review({ chunks, setChunks }) {
                 <p>Phrase # {chunk.number}</p>
                 <p>
                   Progress till complete:{" "}
-                  {Math.floor((chunk.strength / 7.0) * 100)} %
+                  {Math.floor((chunk.strength / maxStrength) * 100)} %
                 </p>
               </li>
             ))}
           </ul>
         </div>
         <div className="col">
-          <ChunkReview chunks={chunks} setChunks={setChunks} />
+          <ChunkReview chunks={chunks} setChunks={setChunks} maxStrength={maxStrength}/>
         </div>
       </div>
     );
