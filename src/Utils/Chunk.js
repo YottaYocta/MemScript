@@ -19,7 +19,7 @@ export function sortChunk(a, b) {
 export function rechunk(script, size) {
   let chunks = [];
   let count = 0;
-  let sentences = script.split(".");
+  let sentences = script.trim().split(".");
   for (let i = 0; i < sentences.length; i += size) {
     let text = "";
     for (let j = 0; j < size; j++) {

@@ -27,6 +27,9 @@ function Chunker({ chunkSize, chunks, setChunks, script, setScript }) {
           value={scriptValue}
           onChange={handleChange}
         ></input>
+        <button className="btn btn-primary form-control mt-3" type="submit">
+          Generate phrases 
+        </button>
       </form>
     </div>
   );
