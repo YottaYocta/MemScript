@@ -23,12 +23,14 @@ export function rechunk(script, size) {
   for (let i = 0; i < sentences.length; i += size) {
     let text = "";
     for (let j = 0; j < size; j++) {
-      if (i + j < sentences.length) {
-        text += sentences[i + j] + ". ";
+      if (i + j < sentences.length && sentences[i + j].trim()) {
+        text += sentences[i + j].trim() + ". ";
       }
     }
-    chunks.push(new Chunk(count, text));
-    count++;
+    if (text) {
+      chunks.push(new Chunk(count, text));
+      count++;
+    }
   }
   return chunks;
 }
