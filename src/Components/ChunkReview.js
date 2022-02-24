@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { sortChunk } from "../Utils/Chunk";
 import Differ from "./Motion";
 
-function ChunkReview({ chunks, setChunks, maxStrength }) {
+function ChunkReview({ chunks, setChunks, maxStrength, chunkingProtocol }) {
   const [mode, setMode] = useState("review");
   const [startTime, setStartTime] = useState(Date.now());
   const [endTime, setEndTime] = useState(Date.now());
@@ -11,7 +11,7 @@ function ChunkReview({ chunks, setChunks, maxStrength }) {
   const [movement, setMovementCount] = useState(0);
 
   useEffect(() => {
-    setWPM(chunks[0].getWords() / ((endTime - startTime) / 60000));
+    setWPM((chunkingProtocol === "lexographic" ? chunks[0].getWords() : chunks[0].getChars()) / ((endTime - startTime) / 60000));
   }, [startTime, chunks, endTime]);
 
   const startTest = () => {
@@ -28,7 +28,7 @@ function ChunkReview({ chunks, setChunks, maxStrength }) {
     let chunksCopy = [...chunks];
     let penalty = 0;
 
-    if (movement > chunks[0].getWords() / 2 && movement <= 0) {
+    if (movement > (chunkingProtocol === 'lexographic' ? chunks[0].getWords() : chunks[0].getChars()) / 2 && movement <= 0) {
       penalty -= 0.5;
     }
 
@@ -54,7 +54,7 @@ function ChunkReview({ chunks, setChunks, maxStrength }) {
   };
 
   const renderMotion = () => {
-    if (movement > chunks[0].getWords()) {
+    if (movement > (chunkingProtocol === "lexographic" ? chunks[0].getWords() : chunks[0].getChars())) {
       return (
         <p>
           Hand gestures or other motions: {movement}
@@ -107,7 +107,7 @@ function ChunkReview({ chunks, setChunks, maxStrength }) {
         return (
           <div>
             <p className="blockquote">{chunks[0].text}</p>
-            <p>Word count: {chunks[0].getWords()}</p>
+            <p>Word count: {(chunkingProtocol === "lexographic" ? chunks[0].getWords() : chunks[0].getChars())}</p>
             <button className="btn btn-primary btn-lg" onClick={startTest}>
               Test this Phrase
             </button>
@@ -126,7 +126,7 @@ function ChunkReview({ chunks, setChunks, maxStrength }) {
         return (
           <div className="row">
             <p className="blockquote">{chunks[0].text}</p>
-            <p>Word count: {chunks[0].getWords()}</p>
+            <p>Word count: {(chunkingProtocol === "lexographic" ? chunks[0].getWords() : chunks[0].getChars())}</p>
             {renderWPM()}
             {renderMotion()}
             <button

@@ -2,7 +2,7 @@ import React from "react";
 
 import ChunkReview from "./ChunkReview";
 
-function Review({ chunks, setChunks, maxStrength }) {
+function Review({ chunks, setChunks, maxStrength, chunkingProtocol }) {
   const renderChunks = () => {
     return (
       <div className="row">
@@ -32,6 +32,7 @@ function Review({ chunks, setChunks, maxStrength }) {
             chunks={chunks}
             setChunks={setChunks}
             maxStrength={maxStrength}
+            chunkingProtocol={chunkingProtocol}
           />
         </div>
       </div>

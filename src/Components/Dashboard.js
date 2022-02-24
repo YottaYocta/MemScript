@@ -11,6 +11,7 @@ function Dashboard() {
   const [chunks, setChunks] = useState([]);
   const [script, setScript] = useState("");
   const [chunkSize, setChunkSize] = useState(2);
+  const [chunkingProtocol, setChunkingProtocol] = useState("lexographic");
 
   useEffect(() => {
     setChunks(rechunk(script, chunkSize));
@@ -38,12 +39,13 @@ function Dashboard() {
           </a>
         </div>
       </nav>
-      <div className="container-fluid mt-3 mb-3">
+      <div className="container mt-3 mb-3">
         {chunks.length > 0 && script ? (
           <Review
             chunks={chunks}
             setChunks={setChunks}
             maxStrength={maxStrength}
+            chunkingProtocol={chunkingProtocol}
           />
         ) : (
           <Chunker
@@ -52,6 +54,8 @@ function Dashboard() {
             setChunks={setChunks}
             script={script}
             setScript={setScript}
+            chunkingProtocol={chunkingProtocol}
+            setChunkingProtocol={setChunkingProtocol}
           />
         )}
       </div>
