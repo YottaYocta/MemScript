@@ -4,9 +4,18 @@ import { useState } from "react";
 import Toggle from "./Toggle";
 import { rechunk } from "../Utils/Chunk";
 
-function Chunker({ chunkSize, chunks, setChunks, script, setScript, chunkingProtocol, setChunkingProtocol }) {
+function Chunker({
+  chunkSize,
+  chunks,
+  setChunks,
+  script,
+  setScript,
+  chunkingProtocol,
+  setChunkingProtocol,
+}) {
   const [scriptValue, setScriptValue] = useState("");
-  const [tempChunkingProtocol, setTempChunkingProtocol] = useState(chunkingProtocol);
+  const [tempChunkingProtocol, setTempChunkingProtocol] =
+    useState(chunkingProtocol);
 
   const handleChange = (e) => {
     setScriptValue(e.target.value);
@@ -33,7 +42,12 @@ function Chunker({ chunkSize, chunks, setChunks, script, setScript, chunkingProt
           ></input>
         </div>
         <div className="col-2">
-          <Toggle value={tempChunkingProtocol} setValue={setTempChunkingProtocol} firstOption={"lexographic"} secondOption={"ideographic"} />
+          <Toggle
+            value={tempChunkingProtocol}
+            setValue={setTempChunkingProtocol}
+            firstOption={"lexographic"}
+            secondOption={"ideographic"}
+          />
         </div>
       </div>
       <div className="row">

@@ -11,7 +11,8 @@ export default class Chunk {
   }
 
   getChars() {
-    return this.text.replace(/[.,\/#!$%\^&\*;:{}=\-_~()]/g,"").replace(" ", "").length
+    return this.text.replace(/[.,/#!$%^&*;:{}=\-_~()]/g, "").replace(" ", "")
+      .length;
   }
 }
 
@@ -23,12 +24,14 @@ export function sortChunk(a, b) {
 export function rechunk(script, size) {
   let chunks = [];
   let count = 0;
-  let sentences = script.replace(/(\.+|:|!|\?|\u3002|\uff0c|\uff1f)/gm, "$1|").split("|")
+  let sentences = script
+    .replace(/(\.+|:|!|\?|\u3002|\uff0c|\uff1f)/gm, "$1|")
+    .split("|");
   for (let i = 0; i < sentences.length; i += size) {
     let text = "";
     for (let j = 0; j < size; j++) {
       if (i + j < sentences.length && sentences[i + j].trim()) {
-        text += sentences[i + j].trim() + ' ';
+        text += sentences[i + j].trim() + " ";
       }
     }
     if (text) {
